@@ -1,0 +1,4 @@
+import views
+
+
+views.registration()

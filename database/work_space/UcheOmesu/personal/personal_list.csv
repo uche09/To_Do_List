@@ -1,2 +1,3 @@
-title,description,due_date,status
-seminal,seminal continues,2023-07-21 14:00:00,pending
+title,description,due_date,category,status
+Lecture,we have class now,2023-07-27 11:00:00,personal,pending
+Class,We have lectures now,2023-07-27 10:00:00,personal,pending

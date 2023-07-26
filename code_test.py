@@ -1,6 +1,9 @@
 # import functions
-# import views
+import views
 from classes import List
 
 list = List('UcheOmesu')
-print(list.single_cat('personal'))
+
+views.update_task('UcheOmesu')
+# list.single_cat('personal')
+# list.add_to_list('personal')

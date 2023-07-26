@@ -1,4 +1,5 @@
 import views
 
-
-views.registration()
+# views.registration()
+# views.login()
+# views.home('ProgressEbiye')

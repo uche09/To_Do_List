@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -11,11 +14,9 @@
       <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/users/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/users/users.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/work_space/UcheOmesu/personal/personal_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/work_space/UcheOmesu/personal/personal_list.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/work_space/UcheOmesu/school/school_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/work_space/UcheOmesu/school/school_list.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/work_space/UcheOmesu/work/work_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/work_space/UcheOmesu/work/work_list.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/work_space/ProgressEbiye/personal/personal_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/work_space/ProgressEbiye/personal/personal_list.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/work_space/ProgressEbiye/work/work_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/work_space/ProgressEbiye/work/work_list.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +36,9 @@
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2SRm65yVS5Ump21H4etsobMlS7H" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -43,11 +47,12 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;new__branch&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/PycharmProjects/To_Do_List&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Uche/PycharmProjects/To_Do_List&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -65,7 +70,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\user\PycharmProjects\Learning Python\venv\Scripts\python.exe" />
-      <option name="SDK_NAME" value="Python 3.11 (Learning Python)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />

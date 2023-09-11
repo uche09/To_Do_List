@@ -1,6 +1,10 @@
 import csv
 from classes import List
 import functions
+from pathlib import Path
+from classes import List
+import datetime
+import os
 
 
 def password_creation():
@@ -49,10 +53,18 @@ def login():
 
     login = functions.acc_logger(username, password)
 
+    if login:
+        home(username)
+    elif not login:
+        print('Your password is incorrect!')
+
+    else:
+        print('This account does not exist')
+
 
 def home(username):
     print(f'''You are logged in to {username}.\n\n
-1.  Notifications\n
+1.  {notification(username)} Notifications\n
 2.  My to-do list\n
 3.  Add new task to list\n
 4.  Delete a task.\n
@@ -84,7 +96,7 @@ def home(username):
 
 def my_to_do_list(username):
     all_list = List(username)
-    print(f'''1.    See list in all category\n
+    print(f'''1.  See list in all category\n
 2.  See lists in personal category\n
 3.  See lists in school category\n
 4.  See lists in work category\n
@@ -311,4 +323,45 @@ def delete_task(username):
     else:
         print('You entered an invalid option2')
         delete_task(username)
+
+
+def notification(username):
+    TITLE = 'Pending Task!'
+    message = ''
+    _5days = datetime.timedelta(days=5)
+
+    user_list = List(username)
+
+    for cat in user_list.path.iterdir():
+
+        for file in cat.iterdir():
+            with open(f'{file}', 'r+') as all_list:
+                list_reader = csv.DictReader(all_list)
+
+                data = list(list_reader)
+                path = Path(f'database/notifications/{username}.txt')
+                path.touch()
+
+                with open(f"{path}.txt", 'w', newline='') as note_file:
+                    for line in data:
+
+                        user_list_date = datetime.datetime.strptime(line["due_date"], '%Y-%m-%d %H:%M:%S')
+
+                        if user_list_date > datetime.datetime.now():
+                            days_to_due = user_list_date - datetime.datetime.now()
+
+                            if days_to_due <= _5days:
+                                message = f"You have {days_to_due.days} left to finish {line['title']}"
+                                functions.notify(TITLE, message)
+
+                            else:
+                                pass
+
+                    note_file.write(message)
+
+                with open(f"{path}", 'r', newline='') as note:
+                    lines = note.readlines()
+
+                os.remove(f'{path}')
+                return len(lines)
 

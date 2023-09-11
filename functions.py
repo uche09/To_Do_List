@@ -1,5 +1,9 @@
 import csv
 from pathlib import Path
+from classes import List
+import datetime
+import os
+import plyer
 
 
 def account_creation(first_name, other_name, last_name, gender, username, password):
@@ -52,8 +56,52 @@ def acc_logger(username, password):
                     print('login successful!')
                     return True
                 else:
-                    print('Your password is incorrect!')
                     return False
+            else:
+                return None
 
-        print('This account does not exist')
-        return None
+
+def status_update(username):
+    user_list = List(username)
+
+    for cat in user_list.path.iterdir():
+
+        for file in cat.iterdir():
+            with open(f'{file}', 'r+') as all_list:
+                list_reader = csv.DictReader(all_list)
+
+                data = list(list_reader)
+
+                fieldnames = ['title', 'description', 'due_date', 'category', 'status']
+                new_data = []
+
+                for line in data:
+
+                    user_list_date = datetime.datetime.strptime(line["due_date"], '%Y-%m-%d %H:%M:%S')
+
+                    if user_list_date <= datetime.datetime.now():
+                        line['status'] = 'due'
+
+                    else:
+                        line['status'] = 'pending'
+
+                    new_data.append(line)
+
+            os.remove(f'{file}')
+
+            with open(f"{file}", 'w', newline='') as cat_file:
+                csv_writer = csv.DictWriter(cat_file, fieldnames=fieldnames)
+
+                if cat_file.tell() == 0:
+                    csv_writer.writeheader()
+
+                csv_writer.writerows(new_data)
+                new_data.clear()
+
+
+def notify(title, message):
+    plyer.notification.notify(
+        title=title,
+        message=message,
+        timeout=5
+    )

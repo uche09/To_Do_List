@@ -192,7 +192,6 @@ class List:
         lines[line_index][4] = self.status
 
         os.remove(f'{self.path}/{category}/{category}_list.csv')
-        # lines.pop(line_index-1)
 
         with open(f'{self.path}/{category}/{category}_list.csv', 'w', newline='') as new_file:
             csv_writer2 = csv.writer(new_file)

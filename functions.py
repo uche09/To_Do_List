@@ -53,12 +53,13 @@ def acc_logger(username, password):
         for user in users:
             if user['username'] == username:
                 if user['password'] == password:
-                    print('login successful!')
+
                     return True
                 else:
                     return False
             else:
-                return None
+                continue
+    return None
 
 
 def status_update(username):

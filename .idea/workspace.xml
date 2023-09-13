@@ -8,15 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85d26f9e-ca2b-41c6-8c40-29ce2125a5c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/To_Do_List.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/To_Do_List.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/notifications/UcheOmesu.txt.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/database/users/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/users/users.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/work_space/ProgressEbiye/personal/personal_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/work_space/ProgressEbiye/personal/personal_list.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/work_space/ProgressEbiye/work/work_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/work_space/ProgressEbiye/work/work_list.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/work_space/UcheOmesu/personal/personal_list.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/work_space/UcheOmesu/school/school_list.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/work_space/UcheOmesu/work/work_list.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +34,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -71,7 +73,7 @@
       </envs>
       <option name="SDK_HOME" value="C:\Users\user\PycharmProjects\Learning Python\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />

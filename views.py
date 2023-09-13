@@ -1,5 +1,4 @@
 import csv
-from classes import List
 import functions
 from pathlib import Path
 from classes import List
@@ -18,6 +17,10 @@ def password_creation():
             print('username should not contain white spaces')
             password_creation()
 
+        if len(password) < 8:
+            print("password must not be less than 8 characters")
+            password_creation()
+
     with open('database/users/users.csv', 'r') as user_file:
         users = csv.DictReader(user_file)
 
@@ -25,10 +28,6 @@ def password_creation():
             if user['username'] == username:
                 print('This username has already been taken!!  Try something else')
                 password_creation()
-
-    if len(password) < 8:
-        print("password must not be less than 8 characters")
-        password_creation()
 
     return username, password
 
@@ -45,26 +44,33 @@ def registration():
                                password)
 
     functions.create_user_space(username)
+    print(f'You are logged in to {username}.\n\n')
+    home(username)
 
 
 def login():
     username = input('Enter your username: ')
     password = input('Enter your password: ')
 
-    login = functions.acc_logger(username, password)
+    is_logged_in = functions.acc_logger(username, password)
 
-    if login:
-        home(username)
-    elif not login:
-        print('Your password is incorrect!')
-
-    else:
+    if is_logged_in is None:
         print('This account does not exist')
+    elif is_logged_in:
+        print('logged in successful!')
+        print(f'You are logged in to {username}.\n\n')
+        home(username)
+    else:
+        print('Your password is incorrect!')
 
 
 def home(username):
-    print(f'''You are logged in to {username}.\n\n
-1.  {notification(username)} Notifications\n
+    try:
+        functions.status_update(username)
+    except FileNotFoundError:
+        pass
+
+    print(f'''1.  {notification(username)} Notifications\n
 2.  My to-do list\n
 3.  Add new task to list\n
 4.  Delete a task.\n
@@ -74,7 +80,8 @@ def home(username):
     user_option = input('>>> ')
 
     if user_option == '1':
-        pass
+        print_notification(username)
+        home(username)
     elif user_option == '2':
         my_to_do_list(username)
         home(username)
@@ -327,10 +334,16 @@ def delete_task(username):
 
 def notification(username):
     TITLE = 'Pending Task!'
-    message = ''
+    path = Path(f'database/notifications/{username}.txt')
+
     _5days = datetime.timedelta(days=5)
 
     user_list = List(username)
+
+    try:
+        os.remove(f'{path}')
+    except FileNotFoundError:
+        pass
 
     for cat in user_list.path.iterdir():
 
@@ -339,10 +352,10 @@ def notification(username):
                 list_reader = csv.DictReader(all_list)
 
                 data = list(list_reader)
-                path = Path(f'database/notifications/{username}.txt')
+
                 path.touch()
 
-                with open(f"{path}.txt", 'w', newline='') as note_file:
+                with open(f"{path}", 'a', newline='') as note_file:
                     for line in data:
 
                         user_list_date = datetime.datetime.strptime(line["due_date"], '%Y-%m-%d %H:%M:%S')
@@ -351,17 +364,23 @@ def notification(username):
                             days_to_due = user_list_date - datetime.datetime.now()
 
                             if days_to_due <= _5days:
-                                message = f"You have {days_to_due.days} left to finish {line['title']}"
+                                message = f"You have {days_to_due.days} day(s) left to finish {line['title']}\n"
                                 functions.notify(TITLE, message)
+                                note_file.write(message)
 
                             else:
                                 pass
 
-                    note_file.write(message)
+    with open(f'{path}', 'r', newline='') as note:
+        lines = note.readlines()
+        length = len(lines)
+    return length
 
-                with open(f"{path}", 'r', newline='') as note:
-                    lines = note.readlines()
 
-                os.remove(f'{path}')
-                return len(lines)
+def print_notification(username):
+    path = Path(f'database/notifications/{username}.txt')
 
+    with open(f"{path}", 'r', newline='') as note:
+        lines = note.readlines()
+        for line in lines:
+            print(line)

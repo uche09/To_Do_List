@@ -28,7 +28,7 @@ def account_creation(first_name, other_name, last_name, gender, username, passwo
 
 def create_user_space(username):
     path = Path(f'database/work_space/{username}')
-    path.mkdir()
+    path.mkdir(parents=True)
 
     list_categories = ['work', 'school', 'personal']
     for dir in list_categories:
@@ -47,19 +47,23 @@ def create_user_space(username):
 
 
 def acc_logger(username, password):
-    with open('database/users/users.csv', 'r') as users_file:
-        users = csv.DictReader(users_file)
+    try:
+        with open('database/users/users.csv', 'r') as users_file:
+            users = csv.DictReader(users_file)
 
-        for user in users:
-            if user['username'] == username:
-                if user['password'] == password:
+            for user in users:
+                if user['username'] == username:
+                    if user['password'] == password:
 
-                    return True
+                        return True
+                    else:
+                        return False
                 else:
-                    return False
-            else:
-                continue
-    return None
+                    continue
+        return None
+
+    except FileNotFoundError:
+        return None
 
 
 def status_update(username):

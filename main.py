@@ -1,5 +1,4 @@
 import views
-# import functions
 
 user_option = ''
 

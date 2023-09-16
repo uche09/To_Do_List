@@ -203,7 +203,7 @@ class List:
 
             lines = list(csv_reader)
 
-        if line_index < 1 or line_index > (len(lines) + 1):
+        if int(line_index) < 1 or int(line_index) > (len(lines) + 1):
             print('This task number does not exist in task list. Please enter a valid number\n'
                   '1: Re-enter task number\n'
                   '2: Go back\n')
@@ -218,9 +218,14 @@ class List:
                 print('You entered an invalid option')
                 return
 
-        lines.pop(line_index)
-        os.remove(f'{self.path}/{category}/{category}_list.csv')
+        try:
+            lines.pop(line_index)
 
-        with open(f'{self.path}/{category}/{category}_list.csv', 'w', newline='') as new_file:
-            csv_writer2 = csv.writer(new_file)
-            csv_writer2.writerows(lines)
+            os.remove(f'{self.path}/{category}/{category}_list.csv')
+
+            with open(f'{self.path}/{category}/{category}_list.csv', 'w', newline='') as new_file:
+                csv_writer2 = csv.writer(new_file)
+                csv_writer2.writerows(lines)
+        except IndexError:
+            print("No such task in list\n")
+

@@ -20,14 +20,30 @@ def password_creation():
         if len(password) < 8:
             print("password must not be less than 8 characters")
             password_creation()
+    try:
+        with open('database/users/users.csv', 'r') as user_file:
+            users = csv.DictReader(user_file)
+    except FileNotFoundError:
+        path = Path('database/users')
+        path.mkdir(parents=True)
+        path = Path(f'{path}/users.csv')
+        path.touch()
 
-    with open('database/users/users.csv', 'r') as user_file:
-        users = csv.DictReader(user_file)
+        with open("database/users/users.csv", 'a', newline='') as users_file:
+            field_names = ['first_name', 'other_name', 'last_name', 'gender', 'username', 'password']
 
-        for user in users:
-            if user['username'] == username:
-                print('This username has already been taken!!  Try something else')
-                password_creation()
+            csv_writer = csv.DictWriter(users_file, fieldnames=field_names, delimiter=',')
+
+            if users_file.tell() == 0:
+                csv_writer.writeheader()
+
+        with open('database/users/users.csv', 'r') as user_file:
+            users = csv.DictReader(user_file)
+
+            for user in users:
+                if user['username'] == username:
+                    print('This username has already been taken!!  Try something else')
+                    password_creation()
 
     return username, password
 
@@ -76,6 +92,7 @@ def home(username):
 4.  Delete a task.\n
 5.  Update task\n
 6.  Profile\n
+*.  Exit
 ''')
     user_option = input('>>> ')
 
@@ -96,6 +113,8 @@ def home(username):
         home(username)
     elif user_option == '6':
         pass
+    elif user_option == '*':
+        return
     else:
         print("You entered an invalid option. Please try again\n")
         home(username)
@@ -298,10 +317,10 @@ def delete_task(username):
     task_list = List(username)
 
     print(f'''\n\nPlease select a task category:\n
-        1.  Delete task in personal category\n
-        2.  Delete task in school category\n
-        3.  Delete task in work category\n
-        4:  Go back''')
+1.  Delete task in personal category\n
+2.  Delete task in school category\n
+3.  Delete task in work category\n
+4:  Go back''')
     user_choice = input('>>> ')
 
     if user_choice == '1':
@@ -334,16 +353,18 @@ def delete_task(username):
 
 def notification(username):
     TITLE = 'Pending Task!'
-    path = Path(f'database/notifications/{username}.txt')
+    path = Path(f'database/notifications')
+    notification_list = Path(f'{path}/{username}.txt')
 
-    _5days = datetime.timedelta(days=5)
+    _5days = datetime.timedelta(days=4)
 
     user_list = List(username)
 
     try:
-        os.remove(f'{path}')
+        os.remove(f'{path}/{username}.txt')
     except FileNotFoundError:
-        pass
+        path.mkdir(parents=True)
+        notification_list.touch()
 
     for cat in user_list.path.iterdir():
 
@@ -352,10 +373,9 @@ def notification(username):
                 list_reader = csv.DictReader(all_list)
 
                 data = list(list_reader)
+                notification_list.touch()
 
-                path.touch()
-
-                with open(f"{path}", 'a', newline='') as note_file:
+                with open(f"{path}/{username}.txt", 'a', newline='') as note_file:
                     for line in data:
 
                         user_list_date = datetime.datetime.strptime(line["due_date"], '%Y-%m-%d %H:%M:%S')
@@ -371,7 +391,7 @@ def notification(username):
                             else:
                                 pass
 
-    with open(f'{path}', 'r', newline='') as note:
+    with open(f'{path}/{username}.txt', 'r', newline='') as note:
         lines = note.readlines()
         length = len(lines)
     return length

@@ -17,33 +17,37 @@ def password_creation():
             print('username should not contain white spaces')
             password_creation()
 
-        if len(password) < 8:
-            print("password must not be less than 8 characters")
-            password_creation()
+    if len(password) < 8:
+        print("password must not be less than 8 characters")
+        password_creation()
     try:
         with open('database/users/users.csv', 'r') as user_file:
             users = csv.DictReader(user_file)
     except FileNotFoundError:
         path = Path('database/users')
-        path.mkdir(parents=True)
+        try:
+            path.mkdir(parents=True)
+        except FileExistsError:
+            path.mkdir()
+
         path = Path(f'{path}/users.csv')
         path.touch()
 
-        with open("database/users/users.csv", 'a', newline='') as users_file:
-            field_names = ['first_name', 'other_name', 'last_name', 'gender', 'username', 'password']
+    with open("database/users/users.csv", 'a', newline='') as users_file:
+        field_names = ['first_name', 'other_name', 'last_name', 'gender', 'username', 'password']
 
-            csv_writer = csv.DictWriter(users_file, fieldnames=field_names, delimiter=',')
+        csv_writer = csv.DictWriter(users_file, fieldnames=field_names, delimiter=',')
 
-            if users_file.tell() == 0:
-                csv_writer.writeheader()
+        if users_file.tell() == 0:
+            csv_writer.writeheader()
 
-        with open('database/users/users.csv', 'r') as user_file:
-            users = csv.DictReader(user_file)
+    with open('database/users/users.csv', 'r') as user_file:
+        users = csv.DictReader(user_file)
 
-            for user in users:
-                if user['username'] == username:
-                    print('This username has already been taken!!  Try something else')
-                    password_creation()
+        for user in users:
+            if user['username'] == username:
+                print('This username has already been taken!!  Try something else')
+                password_creation()
 
     return username, password
 
@@ -170,10 +174,10 @@ def update_task(username):
     task_list = List(username)
 
     print(f'''\n\nPlease select a task category:\n
-    1.  Update task in personal category\n
-    2.  Update task in school category\n
-    3.  Update task in work category\n
-    4:  Go back''')
+1.  Update task in personal category\n
+2.  Update task in school category\n
+3.  Update task in work category\n
+4:  Go back''')
     user_choice = input('>>> ')
 
     if user_choice == '1':
@@ -363,7 +367,11 @@ def notification(username):
     try:
         os.remove(f'{path}/{username}.txt')
     except FileNotFoundError:
-        path.mkdir(parents=True)
+        try:
+            path.mkdir(parents=True)
+        except FileExistsError:
+            path.mkdir()
+
         notification_list.touch()
 
     for cat in user_list.path.iterdir():

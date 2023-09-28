@@ -229,3 +229,4 @@ class List:
         except IndexError:
             print("No such task in list\n")
 
+        print("Task has been deleted!\n")

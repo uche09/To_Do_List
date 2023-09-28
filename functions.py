@@ -28,7 +28,13 @@ def account_creation(first_name, other_name, last_name, gender, username, passwo
 
 def create_user_space(username):
     path = Path(f'database/work_space/{username}')
-    path.mkdir(parents=True)
+    try:
+        path.mkdir(parents=True)
+    except FileExistsError:
+        try:
+            path.mkdir()
+        except FileExistsError:
+            pass
 
     list_categories = ['work', 'school', 'personal']
     for dir in list_categories:
